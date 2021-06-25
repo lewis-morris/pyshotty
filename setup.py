@@ -9,7 +9,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 setup(
     name='pyshotty',
     version='0.0.2',
-    packages=['screenshot'],
+    packages=['pyshotty'],
     url='https://github.com/lewis-morris/pyshotty',
     license='MIT',
     author='Lewis Morris',
