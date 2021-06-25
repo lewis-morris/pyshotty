@@ -55,8 +55,12 @@ output:  /tmp/tempscreenshot.png
 
 ![Image](examples/tempscreenshot.png)
 
+### Full Example 
+I always find it best to learn by example so follow this jupyter notebook to see the flow. 
 
-### wait for x seconds after ma
+[Jupyter notebook examples](examples/example.ipynb)
+
+All classes have doc strings, so you can always check there if you get stuck.
 
 ## Contact
 
