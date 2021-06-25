@@ -35,8 +35,9 @@ pip install -e .
 
 ## Pending Features
 
-* Alternative formats
-* Chrome selenium
+* Alternative image formats
+* grab via Chrome selenium
+* passing command line parameters
 
 ## How to use
 
