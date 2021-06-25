@@ -2,6 +2,7 @@ import os
 import random
 import subprocess
 import tempfile
+import time
 import urllib
 from multiprocessing import Process, Pipe
 from selenium import webdriver
@@ -10,7 +11,7 @@ from selenium.webdriver.firefox.options import Options
 
 class Firefox:
 
-    def __init__(self, url, browser_size=(1200, 630), browser_loc=None, driver_loc=None, save_path=None,
+    def __init__(self, browser_size=(1200, 630), browser_loc=None, driver_loc=None, save_path=None,
                  file_prefix="tempscreenshot_", randomise_filename=True):
         """
 
@@ -24,7 +25,6 @@ class Firefox:
                              None - will leave the default size
         """
 
-        self.url = url
         base_path = save_path if save_path else tempfile.gettempdir()
         self.filename = base_path + f"/{file_prefix}{random.randint(1, 1000000000) if randomise_filename else ''}.png"
         self.firefox_location = browser_loc
@@ -82,10 +82,14 @@ class Firefox:
             self.geckodriver_location = self._get_terminal_output("which geckodriver", "")
             return not self.geckodriver_location == ""
 
-    def run(self):
+    def grab(self, url, wait_after_load=0):
         """
         Use to grab screenshot
+
+        :param url: URL to grab
+        :param wait_after_load: seconds of delay after page load before grabbing screen
         :return: filename of screenshot
+
         """
 
         try:
@@ -93,7 +97,9 @@ class Firefox:
             driver = webdriver.Firefox(options=self.options, firefox_binary=FirefoxBinary(self.firefox_location),
                                        executable_path=self.geckodriver_location)
 
-            url = urllib.parse.unquote_plus(self.url).replace("www.", "")
+            url = urllib.parse.unquote_plus(self.url)
+
+            url = url.replace("www.", "")
 
             driver.get(url if "http" in url else "https://" + url)
 
@@ -101,6 +107,8 @@ class Firefox:
                 x = driver.execute_script("return document.readyState")
                 if x == "complete":
                     break
+
+            time.sleep(wait_after_load)
 
             driver.save_screenshot(self.filename)
 

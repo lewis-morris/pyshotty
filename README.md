@@ -46,8 +46,9 @@ pip install -e .
 ```python
 
 from pyshotty import Firefox
-screen = Firefox("www.google.com")
-filename = screen.run()
+
+screen = Firefox()
+filename = screen.grab()
 
 ```
 
