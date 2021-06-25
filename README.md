@@ -2,9 +2,9 @@
 
 ## A firefox selenium based screenshot package for use with flask  
 
-Error while running selenium in a flask route brought me to create this - thinking that running as a subprocess might fix things.
+Error while running selenium in a flask route brought me to create this.
 
-Although that want the case, now I have a condensed easy format to grab website screenshots
+Although that I realised soon my error was elsewhere, I now have a condensed easy format to grab website screenshots
 
 ## Prerequisites 
 
