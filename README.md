@@ -1,4 +1,4 @@
-# flask-screenshot
+# pyshotty
 
 ## A firefox selenium based screenshot package for use with flask  
 
