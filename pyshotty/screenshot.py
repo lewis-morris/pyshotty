@@ -93,7 +93,7 @@ class Firefox:
             driver = webdriver.Firefox(options=self.options, firefox_binary=FirefoxBinary(self.firefox_location),
                                        executable_path=self.geckodriver_location)
 
-            url = urllib.parse.unquote_plus(self.url)
+            url = urllib.parse.unquote_plus(self.url.replace("www.", ""))
 
             driver.get(url if "http" in url else "https://" + url)
 
