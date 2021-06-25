@@ -48,12 +48,15 @@ pip install -e .
 from pyshotty import Firefox
 
 screen = Firefox()
-filename = screen.grab()
+filename = screen.grab("www.google.com")
 
 ```
+output:  /tmp/tempscreenshot.png
 
 ![Image](examples/tempscreenshot.png)
 
+
+### wait for x seconds after ma
 
 ## Contact
 

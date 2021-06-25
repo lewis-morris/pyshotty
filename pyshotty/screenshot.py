@@ -1,3 +1,4 @@
+import io
 import os
 import random
 import subprocess
@@ -5,6 +6,8 @@ import tempfile
 import time
 import urllib
 from multiprocessing import Process, Pipe
+
+from PIL import Image
 from selenium import webdriver
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.firefox.options import Options
@@ -82,12 +85,17 @@ class Firefox:
             self.geckodriver_location = self._get_terminal_output("which geckodriver", "")
             return not self.geckodriver_location == ""
 
-    def grab(self, url, wait_after_load=0):
+    def grab(self, url, wait_after_load=0, ret_type="png"):
         """
         Use to grab screenshot
 
         :param url: URL to grab
         :param wait_after_load: seconds of delay after page load before grabbing screen
+        :param ret_type: what to return, options
+                "png":saves image as png
+                "jpg": saves image as jpg
+                "pil": returns pil image
+
         :return: filename of screenshot
 
         """
@@ -97,7 +105,7 @@ class Firefox:
             driver = webdriver.Firefox(options=self.options, firefox_binary=FirefoxBinary(self.firefox_location),
                                        executable_path=self.geckodriver_location)
 
-            url = urllib.parse.unquote_plus(self.url)
+            url = urllib.parse.unquote_plus(url)
 
             url = url.replace("www.", "")
 
@@ -110,11 +118,21 @@ class Firefox:
 
             time.sleep(wait_after_load)
 
-            driver.save_screenshot(self.filename)
+            img = Image.open(io.BytesIO(driver.get_screenshot_as_png()))
 
             driver.close()
 
-            return self.filename
+            if ret_type == "png":
+                img.save(self.filename)
+                return self.filename
+            elif ret_type == "jpg":
+                file = self.filename.replace(".png",".jpg")
+                img.convert('RGB').save(file, "JPEG", quality=100)
+                return file
+            elif ret_type == "pil":
+                return img
+            else:
+                raise Exception("format not found, please use one in [png,jpg,pil]")
 
         except Exception as e:
 
