@@ -14,7 +14,7 @@ Although that I realised soon my error was elsewhere, I now have a condensed eas
 
 ## Features
 
-* Grab screenshots from any website (in .png format)
+* Grab screenshots from any website (in .png, .jpg or PIL image format)
 * Choose browser size (essentially screenshot size)
 
 
