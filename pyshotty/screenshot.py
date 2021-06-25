@@ -28,12 +28,23 @@ class Firefox:
                              None - will leave the default size
         """
 
-        base_path = save_path if save_path else tempfile.gettempdir()
-        self.filename = base_path + f"/{file_prefix}{random.randint(1, 1000000000) if randomise_filename else ''}.png"
+        self.base_path = save_path if save_path else tempfile.gettempdir()
+
+        self._check_paths()
+
+        self.filename = self.base_path + f"/{file_prefix}{random.randint(1, 1000000000) if randomise_filename else ''}.png"
+
         self.firefox_location = browser_loc
         self.geckodriver_location = driver_loc
+
         self.options = None
+
         self._set_up_browser(browser_size)
+
+    def _check_paths(self):
+        if not os.path.isdir(self.base_path):
+            raise Exception("Save path not found")
+
 
     def _set_up_browser(self, browser_size):
 
@@ -50,9 +61,11 @@ class Firefox:
         self.options.headless = True
 
         if len(browser_size) == 2:
+            if browser_size[0] < 450:
+                raise Exception("Browser size must be larger than 450px")
             try:
                 self.options.add_argument(f"--width={int(browser_size[0])}")
-                self.options.add_argument(f"--height={int(browser_size[1])}")
+                self.options.add_argument(f"--height={int(browser_size[1])+85}")
             except ValueError:
                 raise Exception("Browser size is not a valid number")
         elif browser_size:
