@@ -58,7 +58,7 @@ output:  /tmp/tempscreenshot.png
 ### Full Example 
 I always find it best to learn by example so follow this jupyter notebook to see the flow. 
 
-[Jupyter notebook examples](examples/example.ipynb)
+[Jupyter notebook examples](examples/examples.ipynb)
 
 All classes have doc strings, so you can always check there if you get stuck.
 
