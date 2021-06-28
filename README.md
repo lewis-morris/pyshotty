@@ -1,6 +1,6 @@
 # pyshotty
 
-## A firefox selenium based screenshot package for use with flask  
+## A firefox selenium based screenshot package
 
 Error while running selenium in a flask route brought me to create this.
 
