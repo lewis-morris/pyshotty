@@ -8,7 +8,7 @@ Although that I realised soon my error was elsewhere, I now have a condensed eas
 
 ## Prerequisites 
 
-* Ubuntu 
+* Ubuntu (or similar)
 * Firefox   `sudo apt-get install firefox`
 * geckodriver `sudo apt-get install firefox-geckodriver`
 
@@ -22,12 +22,12 @@ Although that I realised soon my error was elsewhere, I now have a condensed eas
 
 Download and install can be done through PyPi
 
-```
+```Shell	
 pip install pyshotty
 ```
 or
 
-```python
+```Shell	
 git clone https://github.com/lewis-morris/pyshotty
 cd pyshotty 
 pip install -e .
